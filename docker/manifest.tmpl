@@ -6,8 +6,7 @@ tags:
 {{/each}}
 {{/if}}
 manifests:
-  -
-    image: dorkng/drone-review-app:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}
+  - image: dorkng/drone-review-app:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{else}}latest{{/if}}
     platform:
       architecture: amd64
       os: linux
