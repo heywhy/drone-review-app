@@ -1,0 +1,41 @@
+---
+name: default
+type: docker
+kind: pipeline
+
+steps:
+  - name: install-hex
+    image: elixir
+    volumes:
+      - name: cache
+        path: /root
+    commands:
+      - mix local.hex --force --if-missing
+
+  - name: install
+    image: elixir
+    volumes:
+      - name: cache
+        path: /root
+    commands:
+      - mix deps.get
+
+  - name: test
+    image: elixir
+    volumes:
+      - name: cache
+        path: /root
+    commands:
+      - mix test
+
+  - name: build
+    image: elixir
+    volumes:
+      - name: cache
+        path: /root
+    commands:
+      - mix escript.build
+
+volumes:
+- name: cache
+  temp: {}
