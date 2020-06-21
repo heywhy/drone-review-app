@@ -3,6 +3,14 @@ name: default
 type: docker
 kind: pipeline
 
+trigger:
+  ref:
+    - refs/heads/dev
+    - refs/heads/bg-*
+    - refs/heads/ch-*
+    - refs/heads/ft-*
+    - refs/heads/rf-*
+
 steps:
   - name: install-hex
     image: elixir
