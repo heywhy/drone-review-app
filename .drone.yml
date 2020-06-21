@@ -5,6 +5,7 @@ kind: pipeline
 
 trigger:
   ref:
+    - refs/heads/master
     - refs/heads/dev
     - refs/heads/bg-*
     - refs/heads/ch-*
@@ -44,6 +45,37 @@ steps:
         path: /root
     commands:
       - mix escript.build
+
+  - name: publish
+    image: plugins/docker
+    pull: if-not-exists
+    settings:
+      repo: dorkng/drone-review-app
+      auto_tag: true
+      dockerfile: docker/Dockerfile
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+    when:
+      ref:
+      - refs/heads/master
+      - refs/tags/*
+
+  - name: manifest
+    image: plugins/manifest
+    settings:
+      spec: docker/manifest.tmpl
+      auto_tag: true
+      ignore_missing: true
+      password:
+        from_secret: docker_password
+      username:
+        from_secret: docker_username
+    when:
+      ref:
+      - refs/heads/master
+      - refs/tags/*
 
 volumes:
 - name: cache
