@@ -32,10 +32,17 @@ steps:
 
   - name: test
     image: elixir
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_USERNAME: root
+      DB_DATABASE: test
+      DB_PASSWORD: ""
     volumes:
       - name: cache
         path: /root
     commands:
+      - mix ecto.setup
       - mix test
 
   - name: build
@@ -80,3 +87,10 @@ steps:
 volumes:
 - name: cache
   temp: {}
+
+services:
+  - name: mysql
+    image: mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: test
