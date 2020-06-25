@@ -34,9 +34,7 @@ npm-debug.log
 /priv/static/
 
 /.elixir_ls
-
 /bin
-
 /secrets.txt
-
 /.env
+.yarn-integrity
