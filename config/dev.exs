@@ -4,7 +4,7 @@ use Mix.Config
 config :review_app, ReviewApp.Repo,
   username: System.get_env("DB_USERNAME", "root"),
   password: System.get_env("DB_PASSWORD", ""),
-  database: System.get_env("DB_DATABASE", "snippets_dev"),
+  database: System.get_env("DB_DATABASE", "review_app_dev"),
   hostname: System.get_env("DB_HOST", "localhost"),
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
