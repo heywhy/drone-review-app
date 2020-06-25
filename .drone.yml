@@ -42,7 +42,6 @@ steps:
       - name: cache
         path: /root
     commands:
-      - mix ecto.setup
       - mix test
 
   - name: build
