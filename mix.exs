@@ -56,7 +56,9 @@ defmodule ReviewApp.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:optimus, "~> 0.1.0"},
-      {:reverse_proxy_plug, "~> 1.0.0"}
+      {:reverse_proxy_plug, "~> 1.0.0"},
+      {:ueberauth, "~> 0.6"},
+      {:ueberauth_github, "~> 0.8"},
     ]
   end
 
