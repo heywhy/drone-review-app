@@ -22,6 +22,10 @@ steps:
       - mix local.rebar --force
       - mix local.hex --force --if-missing
       - mix deps.get
+    when:
+      ref:
+        exclude:
+          - refs/heads/master
 
   - name: test
     image: elixir:1.10-alpine
@@ -37,6 +41,10 @@ steps:
         path: /root
     commands:
       - mix test
+    when:
+      ref:
+        exclude:
+          - refs/heads/master
 
   - name: publish
     image: plugins/docker

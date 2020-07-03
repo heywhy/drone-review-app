@@ -16,7 +16,10 @@ ENV MIX_ENV=prod
 # install mix dependencies
 COPY mix.exs mix.lock ./
 COPY config config
-RUN mix do deps.get, deps.compile
+RUN mix deps.get
+# this line was included to fix out of memory issue when compiling idna
+RUN cd deps/idna && /root/.mix/rebar3 compile
+RUN mix deps.compile
 
 # build assets
 COPY assets/package.json assets/yarn.lock ./assets/
