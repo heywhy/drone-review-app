@@ -1,0 +1,24 @@
+version: '3'
+services:
+  review_app:
+    container_name: db
+    image: dorkng/drone-review-app
+    restart: always
+    env_file:
+      - .env.prod
+    ports:
+      - "4001:4000"
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: db
+    image: mysql:latest
+    restart: always
+    volumes:
+      - /var/folders/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: review_app
+    ports:
+      - "3306:3306"
