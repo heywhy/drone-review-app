@@ -1,7 +1,7 @@
 version: '3'
 services:
   review_app:
-    container_name: db
+    container_name: review_app
     image: dorkng/drone-review-app
     restart: always
     env_file:
