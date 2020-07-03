@@ -35,7 +35,10 @@ RUN mix do compile, release
 
 # prepare release image
 FROM alpine:3.9 AS app
-RUN apk add --no-cache openssl ncurses-libs
+RUN apk add --no-cache bash openssl ncurses-libs
+
+EXPOSE 4000
+ENV MIX_ENV=prod
 
 WORKDIR /app
 
@@ -44,7 +47,8 @@ RUN chown nobody:nobody /app
 USER nobody:nobody
 
 COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/review_app ./
+COPY docker/docker-entrypoint.sh .
 
 ENV HOME=/app
 
-CMD ["bin/review_app", "start"]
+CMD ["bash", "/app/docker-entrypoint.sh"]
