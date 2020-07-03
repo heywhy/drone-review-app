@@ -38,3 +38,4 @@ npm-debug.log
 /secrets.txt
 /.env
 .yarn-integrity
+/docker-compose.yml

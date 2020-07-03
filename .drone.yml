@@ -13,44 +13,30 @@ trigger:
     - refs/heads/rf-*
 
 steps:
-  - name: install-hex
-    image: elixir
+  - name: install
+    image: elixir:1.10-alpine
     volumes:
       - name: cache
         path: /root
     commands:
       - mix local.rebar --force
       - mix local.hex --force --if-missing
-
-  - name: install
-    image: elixir
-    volumes:
-      - name: cache
-        path: /root
-    commands:
       - mix deps.get
 
   - name: test
-    image: elixir
+    image: elixir:1.10-alpine
     environment:
       DB_CONNECTION: mysql
       DB_HOST: mysql
       DB_USERNAME: root
       DB_DATABASE: test
       DB_PASSWORD: ""
+      MIX_ENV: test
     volumes:
       - name: cache
         path: /root
     commands:
       - mix test
-
-  - name: build
-    image: elixir
-    volumes:
-      - name: cache
-        path: /root
-    commands:
-      - mix escript.build
 
   - name: publish
     image: plugins/docker
