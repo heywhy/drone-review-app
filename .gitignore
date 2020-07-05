@@ -37,5 +37,7 @@ npm-debug.log
 /bin
 /secrets.txt
 /.env
+/.env.*
+!/.env.example
 .yarn-integrity
 /docker-compose.yml

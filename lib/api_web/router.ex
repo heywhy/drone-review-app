@@ -8,16 +8,27 @@ defmodule ReviewAppWeb.Router do
     plug :put_root_layout, {ReviewAppWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+
+    plug Ueberauth
   end
 
   pipeline :review_app do
     plug :accepts, ["json"]
   end
 
+  scope "/auth", ReviewAppWeb do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+
+    post "/logout", AuthController, :delete
+  end
+
   scope "/", ReviewAppWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    live "/", HomeLive, :index
   end
 
   # Other scopes may use custom stacks.
