@@ -6,10 +6,10 @@
       <div class="py-1 w-full h-full flex justify-center">
         <input
           type="search"
-          x-on:focus="isSearchActive = true"
-          x-on:blur="isSearchActive = false"
+          @focus="isSearchActive = true"
+          @blur="isSearchActive = false"
           class="repo--search-input"
-          x-bind:class="{ active: isSearchActive }"
+          :class="{ active: isSearchActive }"
           placeholder="Search for repositories to jump to.."
         />
       </div>
@@ -19,9 +19,9 @@
     <div class="w-auto">
       <div>
         <div class="text-right relative">
-          <img x-on:click="isAccountMenuOpened = !isAccountMenuOpened" src="<%= @auth.avatar_url %>" class="cursor-pointer inline-block h-8 w-8 rounded-full hover:border-gray-500 border object-cover object-center focus:outline-none" />
+          <img @click.away="isAccountMenuOpened = false" @click="isAccountMenuOpened = !isAccountMenuOpened" src="<%= @auth.avatar_url %>" class="cursor-pointer inline-block h-8 w-8 rounded-full hover:border-gray-500 border object-cover object-center focus:outline-none" />
           <div x-show="isAccountMenuOpened">
-            <div x-on:click="isAccountMenuOpened = false" class="overlay"></div>
+            <div class="overlay"></div>
 
             <div class="absolute right-0 mt-1">
               <div class="bg-white shadow-md rounded" style="min-width: 15.625rem;">
