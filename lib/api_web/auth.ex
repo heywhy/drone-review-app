@@ -57,6 +57,7 @@ defmodule ReviewAppWeb.Auth do
         email: email_from_auth(auth),
         username: username_from_auth(auth),
         avatar_url: avatar_from_auth(auth),
+        credentials: credentials(auth)
       }
     end
 
@@ -79,6 +80,10 @@ defmodule ReviewAppWeb.Auth do
         end
       end
     end
+
+    defp credentials(%Auth{} = auth), do: credentials(auth.credentials)
+
+    defp credentials(%Auth.Credentials{} = params), do: Jason.decode!(Jason.encode!(params))
 
     defp validate_pass(%{other: %{password: ""}}) do
       {:error, "Password required"}

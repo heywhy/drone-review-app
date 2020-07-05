@@ -8,6 +8,7 @@ defmodule ReviewApp.Models.User do
       field :email, :string
       field :username, :string
       field :avatar_url, :string
+      field :credentials, :map
 
       timestamps()
     end
@@ -15,7 +16,7 @@ defmodule ReviewApp.Models.User do
     @doc false
     def changeset(user, attrs) do
       user
-      |> cast(attrs, [:uid, :name, :email, :username, :avatar_url])
+      |> cast(attrs, [:uid, :name, :email, :username, :avatar_url, :credentials])
       |> validate_required([:uid, :name, :username])
       |> update_change(:email, &String.downcase/1)
       |> update_change(:name, &String.downcase/1)
