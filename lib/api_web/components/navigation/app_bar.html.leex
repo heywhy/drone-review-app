@@ -38,12 +38,12 @@
 
       </div>
     <% else %>
-    <div class="flex justify-end">
-      <a href="/auth/github" class="flex justify-end items-center bg-gray-600 py-1 px-3 rounded font-semibold text-gray-100 tracking-wide shadow-md">
-        <%= live_component @socket, Icons.GithubIcon, %{class: "h-5 w-5"} %>
-        <span class="ml-2">Sign in</span>
-      </a>
-    </div>
+      <div class="flex justify-end">
+        <a href="/auth/github" class="flex justify-end items-center bg-gray-600 py-1 px-3 rounded font-semibold text-gray-100 tracking-wide shadow-md">
+          <%= live_component @socket, Icons.GithubIcon, %{class: "h-5 w-5"} %>
+          <span class="ml-2">Sign in</span>
+        </a>
+      </div>
     <% end %>
   </div>
 </header>

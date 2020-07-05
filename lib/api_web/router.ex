@@ -29,6 +29,7 @@ defmodule ReviewAppWeb.Router do
     pipe_through :browser
 
     live "/", HomeLive, :index
+    live "/page", PageLive, :index
   end
 
   # Other scopes may use custom stacks.
