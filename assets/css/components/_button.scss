@@ -1,0 +1,13 @@
+.btn {
+  @apply flex justify-end items-center py-1 px-3;
+  @apply bg-gray-600 rounded shadow-sm;
+  @apply font-semibold text-gray-200 tracking-wide;
+
+  &:focus {
+    @apply outline-none;
+  }
+
+  &:hover {
+    @apply shadow-md;
+  }
+}
