@@ -1,0 +1,18 @@
+.repo--search-input {
+  max-width: 22.75rem;
+  @apply shadow-md h-full px-3 w-full bg-gray-700 flex items-center rounded;
+  @apply transition duration-100 ease-in-out;
+  @apply font-light text-gray-800;
+  &.active {
+    @apply bg-white z-10;
+    max-width: 38.75rem;
+  }
+
+  &::placeholder {
+    @apply font-thin text-sm;
+  }
+
+  &:focus {
+    @apply bg-white outline-none;
+  }
+}

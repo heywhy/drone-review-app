@@ -1,13 +1,27 @@
-<header class="flex justify-between items-center px-4 py-2 bg-gray-900">
-  <div class="w-1/2 font-semibold text-gray-100 text-lg">ReviewApp</div>
+<header x-data="{ isSearchActive: false, isAccountMenuOpened: false }" class="flex justify-between items-center px-4 py-2 bg-gray-900">
+  <div class="w-auto font-semibold text-gray-100 text-lg">ReviewApp</div>
 
-  <div class="w-1/2">
-    <%= if @auth do %>
+  <%= if @auth do %>
+    <div class="flex-grow px-2" style="height: 3.125rem;">
+      <div class="py-1 w-full h-full flex justify-center">
+        <input
+          type="search"
+          x-on:focus="isSearchActive = true"
+          x-on:blur="isSearchActive = false"
+          class="repo--search-input"
+          x-bind:class="{ active: isSearchActive }"
+          placeholder="Search for repositories to jump to.."
+        />
+      </div>
+      <div x-show="isSearchActive" class="overlay dimmed"></div>
+    </div>
+
+    <div class="w-auto">
       <div>
         <div class="text-right relative">
-          <img phx-click="account-menu" phx-target="<%= @myself %>" src="<%= @auth.avatar_url %>" class="cursor-pointer inline-block h-8 w-8 rounded-full hover:border-gray-500 border object-cover object-center focus:outline-none" />
-          <%= if @isAccountMenuOpened do %>
-            <div phx-click="close:account-menu" phx-target="<%= @myself %>" class="fixed inset-0"></div>
+          <img x-on:click="isAccountMenuOpened = !isAccountMenuOpened" src="<%= @auth.avatar_url %>" class="cursor-pointer inline-block h-8 w-8 rounded-full hover:border-gray-500 border object-cover object-center focus:outline-none" />
+          <div x-show="isAccountMenuOpened">
+            <div x-on:click="isAccountMenuOpened = false" class="overlay"></div>
 
             <div class="absolute right-0 mt-1">
               <div class="bg-white shadow-md rounded" style="min-width: 15.625rem;">
@@ -33,17 +47,17 @@
                 </div>
               </div>
             </div>
-          <% end %>
+          </div>
         </div>
 
       </div>
-    <% else %>
-      <div class="flex justify-end">
-        <a href="/auth/github" class="flex justify-end items-center bg-gray-600 py-1 px-3 rounded font-semibold text-gray-100 tracking-wide shadow-md">
-          <%= live_component @socket, Icons.GithubIcon, %{class: "h-5 w-5"} %>
-          <span class="ml-2">Sign in</span>
-        </a>
-      </div>
-    <% end %>
-  </div>
+    </div>
+  <% else %>
+    <div class="flex justify-end">
+      <a href="/auth/github" class="flex justify-end items-center bg-gray-600 py-1 px-3 rounded font-semibold text-gray-100 tracking-wide shadow-md">
+        <%= live_component @socket, Icons.GithubIcon, %{class: "h-5 w-5"} %>
+        <span class="ml-2">Sign in</span>
+      </a>
+    </div>
+  <% end %>
 </header>
