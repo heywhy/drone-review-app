@@ -10,4 +10,8 @@
   &:hover {
     @apply shadow-md;
   }
+
+  &[disabled], &:disabled {
+    @apply bg-gray-500 shadow-none cursor-not-allowed;
+  }
 }
