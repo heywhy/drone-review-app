@@ -2,8 +2,18 @@ defmodule ReviewAppWeb.Components.Icons.CWIcon do
   use ReviewAppWeb, :live_component
 
   def mount(socket) do
-    {:ok, assign(socket, :class, "")}
+    socket = socket
+    |> assign(:class, "")
+    |> assign(:is_loading, false)
+
+    {:ok, socket}
   end
+
+  def update(%{class: current, is_loading: true}, socket) do
+    {:ok, assign(socket, :class, current <> " spinning")}
+  end
+
+  def update(assigns, socket), do: {:ok, assign(socket, assigns)}
 
   def render(assigns) do
     ~L"""
