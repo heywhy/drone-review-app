@@ -10,7 +10,7 @@ defmodule ReviewApp.Models.User do
       field :avatar_url, :string
       field :credentials, :map
 
-      timestamps()
+      timestamps(type: :utc_datetime)
     end
 
     @doc false

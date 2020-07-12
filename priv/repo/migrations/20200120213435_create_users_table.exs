@@ -11,7 +11,7 @@ defmodule ReviewApp.Repo.Migrations.CreateUsersTable do
       add :avatar_url, :string, [null: true]
       add :credentials, :map, [null: true]
 
-      timestamps()
+      timestamps(type: :utc_datetime)
     end
 
     create unique_index(:users, :uid)
