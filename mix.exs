@@ -21,7 +21,7 @@ defmodule ReviewApp.MixProject do
   def application do
     [
       mod: {ReviewApp.Application, []},
-      extra_applications: [:logger, :runtime_tools, :os_mon]
+      extra_applications: [:logger, :runtime_tools, :os_mon, :httpoison]
     ]
   end
 
@@ -59,6 +59,10 @@ defmodule ReviewApp.MixProject do
       {:reverse_proxy_plug, "~> 1.0.0"},
       {:ueberauth, "~> 0.6"},
       {:ueberauth_github, "~> 0.8"},
+      {:httpoison, "~> 1.6"},
+      {:tentacat, "~> 2.0"},
+      {:ex_minimatch, "~> 0.0"},
+      {:paginator, "~> 0.6"}
     ]
   end
 
