@@ -29,7 +29,10 @@ config :phoenix, :json_library, Jason
 
 config :ueberauth, Ueberauth,
   providers: [
-    github: { Ueberauth.Strategy.Github, [default_scope: "user", send_redirect_uri: false] }
+    github: { Ueberauth.Strategy.Github, [
+      default_scope: "user,repo,public_repo",
+      send_redirect_uri: false
+    ]}
   ]
 
 # Import environment specific config. This must remain at the bottom
