@@ -12,7 +12,7 @@ defmodule ReviewAppWeb.Router do
     plug Ueberauth
   end
 
-  pipeline :review_app do
+  pipeline :api do
     plug :accepts, ["json"]
   end
 
@@ -25,16 +25,9 @@ defmodule ReviewAppWeb.Router do
     post "/logout", AuthController, :delete
   end
 
-  scope "/", ReviewAppWeb do
-    pipe_through :browser
-
-    live "/", HomeLive, :index
-    live "/page", PageLive, :index
-  end
-
   # Other scopes may use custom stacks.
   # scope "/api", ReviewAppWeb do
-  #   pipe_through :review_app
+  #   pipe_through :api
   # end
 
   # Enables LiveDashboard only for development
@@ -51,5 +44,17 @@ defmodule ReviewAppWeb.Router do
       pipe_through :browser
       live_dashboard "/dashboard", metrics: ReviewAppWeb.Telemetry
     end
+  end
+
+  scope "/api", ReviewAppWeb do
+    pipe_through :browser
+
+    get "/me", AuthController, :me
+  end
+
+  scope "/", ReviewAppWeb do
+    pipe_through :browser
+
+    get "/*path", PageController, :index
   end
 end

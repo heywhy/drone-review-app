@@ -28,10 +28,10 @@ defmodule ReviewApp.Services.Github do
     end
   end
 
-  @spec existing_repos(integer()) :: Paginator.Page.t()
-  def existing_repos(_ \\ 1) do
+  @spec existing_repos(keyword) :: Paginator.Page.t()
+  def existing_repos(opts \\ []) do
     query = from(r in Repository)
-    ReviewApp.Repo.paginate(query, limit: 15, cursor_fields: [:id, :full_name])
+    ReviewApp.Repo.paginate(query, [limit: 15, cursor_fields: [:id, :full_name]] ++ opts)
   end
 
   def new_repos(repos, now) do

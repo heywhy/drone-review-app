@@ -7,6 +7,8 @@
 # General application configuration
 use Mix.Config
 
+config :review_app, ReviewApp, env: Mix.env()
+
 config :review_app,
   namespace: ReviewApp,
   ecto_repos: [ReviewApp.Repo]

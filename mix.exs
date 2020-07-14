@@ -62,7 +62,9 @@ defmodule ReviewApp.MixProject do
       {:httpoison, "~> 1.6"},
       {:tentacat, "~> 2.0"},
       {:ex_minimatch, "~> 0.0"},
-      {:paginator, "~> 0.6"}
+      {:paginator, "~> 0.6"},
+      {:docker_api, "~> 0.1.1"},
+      {:ex_docker_compose, "~> 0.2.0"}
     ]
   end
 
