@@ -1,8 +1,6 @@
 @import "tailwindcss/base";
-
 @import "tailwindcss/components";
-
-@import "./input";
-@import "./button";
-
 @import "tailwindcss/utilities";
+
+@import "./button";
+@import "./form";
