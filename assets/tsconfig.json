@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ESNEXT",
+    "module": "ESNEXT",
+    "allowJs": true,
+    "checkJs": true,
+    "removeComments": false,
+    // "isolatedModules": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {},
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
