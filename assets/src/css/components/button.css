@@ -11,6 +11,11 @@
     @apply shadow-md;
   }
 
+  &.flat {
+    background: transparent;
+    @apply shadow-none;
+  }
+
   &[disabled], &:disabled {
     @apply bg-gray-500 shadow-none cursor-not-allowed;
   }

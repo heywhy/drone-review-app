@@ -1,5 +1,16 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" class="fill-current" v-bind="$attrs" viewBox="0 0 20 20">
-    <path d="M10 19.25L4.5 14H8V1h4v13h3.5L10 19.25z"/>
+  <svg
+    viewBox="0 0 10 19"
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-arrow direction-down"
+    v-bind="$attrs"
+  >
+    <g fill="currentColor" fill-rule="nonzero">
+      <path d="M5.65 1.5a.65.65 0 1 0-1.3 0v15a.65.65 0 1 0 1.3 0v-15z" />
+      <path
+
+        d="M1.46 13.04a.65.65 0 1 0-.92.92L4.4 17.818a.85.85 0 0 0 1.202 0L9.46 13.96a.65.65 0 1 0-.92-.92L5 16.58l-3.54-3.54z"
+      />
+    </g>
   </svg>
 </template>

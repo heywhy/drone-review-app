@@ -24,7 +24,7 @@ declare module '@vue/xstate' {
 
   export function useMachine<TContext, TEvent extends EventObject>(
     machine: StateMachine<TContext, any, TEvent>,
-    options: Partial<InterpreterOptions> &
+    options?: Partial<InterpreterOptions> &
       Partial<UseMachineOptions<TContext, TEvent>> &
       Partial<MachineOptions<TContext, TEvent>>
   ): {
