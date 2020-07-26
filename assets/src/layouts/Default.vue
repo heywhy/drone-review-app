@@ -1,6 +1,6 @@
 <style scoped>
 .page {
-  padding-top: 5.875rem;
+  padding-top: 4rem;
   @apply px-4;
 }
 </style>

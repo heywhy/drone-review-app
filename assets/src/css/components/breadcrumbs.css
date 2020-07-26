@@ -1,0 +1,13 @@
+.breadcrumbs {
+  @apply flex flex-wrap py-px max-w-full;
+}
+
+.breadcrumb-container {
+  @apply flex max-w-full align-top whitespace-no-wrap;
+}
+
+.breadcrumb {
+  @apply py-px overflow-hidden;
+  text-overflow: ellipsis;
+}
+

@@ -10,9 +10,13 @@
 </style>
 
 <template>
-  <div class="container mx-auto pb-6 lg:px-24">
-    <div class="px-4 flex justify-between">
-      <span class="text-sm font-light">Repositories</span>
+  <div class="container mx-auto pb-6">
+    <div class="page-header">
+      <div class="breadcrumbs">
+        <div class="breadcrumb-container">
+          <span class="font-light breadcrumb">Repositories</span>
+        </div>
+      </div>
 
       <button class="btn uppercase" :disabled="state.matches('sync')" @click="send('SYNC_REPOS')">
         <CWIcon class="h-5 w-5" :class="{spinning: state.matches('sync')}" />
@@ -22,7 +26,7 @@
 
     <div v-if="state.matches('init')" class="mt-3 text-center">Loading...</div>
 
-    <div class="mt-4">
+    <div>
       <router-link
         v-for="repo in repositories"
         :key="repo.node_id"
@@ -39,8 +43,8 @@
     </div>
 
     <div v-if="!!metadata && metadata.after" class="pl-2 mt-4">
-      <button class="btn flat btn--show-more" @click="send('FETCH_MORE')">
-        <arrow-long-down-icon class="h-5 w-5" />
+      <button class="btn flat btn--show-more" @click="send('FETCH_MORE_REPOS')">
+        <arrow-long-icon class="h-5 w-5" />
         <span class="ml-1 text-sm font-light">Show more repositories</span>
       </button>
     </div>
@@ -55,8 +59,8 @@ import { createMachine, assign, EventObject, TransitionConfig, DoneInvokeEvent }
 
 import { Repository } from '../models/repository'
 import { PaginationMetadata, Pagination } from '../models/pagination'
+import { CWIcon, GithubIcon, ArrowLongIcon } from '../components/icons'
 import { useRepositories, useSyncRepositories } from '../hooks/repository'
-import { CWIcon, GithubIcon, ArrowLongDownIcon } from '../components/icons'
 
 type Context = {
   repositories: Repository[],
@@ -64,7 +68,7 @@ type Context = {
 }
 
 export default defineComponent({
-  components: { CWIcon, GithubIcon, ArrowLongDownIcon },
+  components: { CWIcon, GithubIcon, ArrowLongIcon },
   setup() {
     const { fetchRepositories } = useRepositories()
     const { syncRepositories } = useSyncRepositories()
@@ -86,7 +90,7 @@ export default defineComponent({
       states: {
         idle: {
           on: {
-            FETCH_MORE: 'fetch',
+            FETCH_MORE_REPOS: 'fetchMore',
             SYNC_REPOS: 'sync',
           },
         },
@@ -96,7 +100,7 @@ export default defineComponent({
             onDone: onFetchDone,
           },
         },
-        fetch: {
+        fetchMore: {
           invoke: {
             src: ({ metadata }) => fetchRepositories(metadata.after),
             onDone: onFetchDone,

@@ -1,8 +1,16 @@
+<style>
+.icon-arrow {
+  &.direction-right {
+    transform: rotate(-90deg);
+  }
+}
+</style>
+
 <template>
   <svg
     viewBox="0 0 10 19"
     xmlns="http://www.w3.org/2000/svg"
-    class="icon-arrow direction-down"
+    class="icon-arrow"
     v-bind="$attrs"
   >
     <g fill="currentColor" fill-rule="nonzero">
