@@ -30,7 +30,7 @@
       <router-link
         v-for="repo in repositories"
         :key="repo.node_id"
-        :to="`${repo.full_name}/settings`"
+        :to="getRepoUrl(repo)"
         class="flex items-center p-4 mb-3 cursor-pointer bg-white rounded shadow hover:shadow-md"
       >
         <div class="">
@@ -72,6 +72,9 @@ export default defineComponent({
   setup() {
     const { fetchRepositories } = useRepositories()
     const { syncRepositories } = useSyncRepositories()
+
+    const getRepoUrl = (repo: Repository) =>
+      !repo.activated ? `${repo.full_name}/settings` : repo.full_name
 
     const onFetchDone: TransitionConfig<Context, DoneInvokeEvent<Pagination<Repository>>> = {
       target: 'idle',
@@ -123,6 +126,7 @@ export default defineComponent({
     return {
       send,
       state,
+      getRepoUrl,
       metadata: computed(() => state.value.context.metadata),
       repositories: computed(() => state.value.context.repositories),
     }
