@@ -1,6 +1,8 @@
 defmodule ReviewAppWeb.AuthController do
   use ReviewAppWeb, :controller
 
+  alias ReviewAppWeb.Auth
+
   def delete(conn, _params) do
     conn
     |> put_flash(:info, "You have been logged out!")
@@ -15,11 +17,11 @@ defmodule ReviewAppWeb.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    case ReviewAppWeb.Auth.find_or_create(auth) do
+    case Auth.find_or_create(auth) do
       {:ok, user} ->
         conn
         |> put_flash(:info, "Successfully authenticated.")
-        |> put_session(:current_user, user)
+        |> Auth.set_current_user(user)
         |> configure_session(renew: true)
         |> authenticated()
 
@@ -31,8 +33,7 @@ defmodule ReviewAppWeb.AuthController do
   end
 
   def me(%Plug.Conn{} = conn, _params) do
-    user = conn |> get_session(:current_user)
-    conn |> json(user)
+    conn |> json(Auth.current_user(conn))
   end
 
   defp authenticated(conn) do

@@ -6,7 +6,7 @@ defmodule ReviewAppWeb.Router do
     plug :fetch_session
     plug :fetch_live_flash
     plug :put_root_layout, {ReviewAppWeb.LayoutView, :root}
-    plug :protect_from_forgery
+    # plug :protect_from_forgery
     plug :put_secure_browser_headers
 
     plug Ueberauth
@@ -40,6 +40,8 @@ defmodule ReviewAppWeb.Router do
   if Mix.env() in [:dev, :test] do
     import Phoenix.LiveDashboard.Router
 
+    live "/page", ReviewAppWeb.PageLive, :index
+
     scope "/" do
       pipe_through :browser
       live_dashboard "/dashboard", metrics: ReviewAppWeb.Telemetry
@@ -50,11 +52,5 @@ defmodule ReviewAppWeb.Router do
     pipe_through :browser
 
     get "/me", AuthController, :me
-  end
-
-  scope "/", ReviewAppWeb do
-    pipe_through :browser
-
-    get "/*path", PageController, :index
   end
 end

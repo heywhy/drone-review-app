@@ -8,6 +8,14 @@ defmodule ReviewAppWeb.Auth do
     alias Ueberauth.Auth
     alias ReviewApp.Models.User
 
+    def current_user(%Plug.Conn{} = conn) do
+      conn |> Plug.Conn.get_session(:current_user)
+    end
+
+    def set_current_user(%Plug.Conn{} = conn, %User{} = user) do
+      conn |> Plug.Conn.put_session(:current_user, user)
+    end
+
     def find_or_create(%Auth{provider: :identity} = auth) do
       case validate_pass(auth.credentials) do
         :ok ->

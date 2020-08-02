@@ -20,3 +20,5 @@ config :review_app, ReviewAppWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+import_config "extras.exs"
