@@ -14,6 +14,7 @@ defmodule ReviewAppWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug ReviewAppWeb.Plugs.Api
   end
 
   scope "/auth", ReviewAppWeb do
@@ -49,7 +50,7 @@ defmodule ReviewAppWeb.Router do
   end
 
   scope "/api", ReviewAppWeb do
-    pipe_through :browser
+    pipe_through [:browser, :api]
 
     get "/me", AuthController, :me
   end

@@ -24,6 +24,8 @@ defmodule ReviewAppWeb do
       import Plug.Conn
       import ReviewAppWeb.Gettext
       alias ReviewAppWeb.Router.Helpers, as: Routes
+
+      def json(conn, body, status), do: conn |> put_status(status) |> json(body)
     end
   end
 
