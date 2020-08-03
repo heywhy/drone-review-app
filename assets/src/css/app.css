@@ -10,6 +10,10 @@ body {
 
 .page-header {
   @apply h-20 flex justify-between items-center px-5;
+
+  &.secondary-page-header {
+    @apply h-auto mb-8;
+  }
 }
 
 .container {
