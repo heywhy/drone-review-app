@@ -1,4 +1,4 @@
-defmodule ReviewAppWeb.Api do
+defmodule ReviewAppWeb.ApiPlugTest do
   use ExUnit.Case, async: true
   use Plug.Test
 
@@ -6,7 +6,7 @@ defmodule ReviewAppWeb.Api do
 
   @opts Router.init([])
 
-  test "returns hello world" do
+  test "includes 'content-type' header in response" do
     # Create a test connection
     conn = conn(:get, "/api/me")
     |> init_test_session(%{})
